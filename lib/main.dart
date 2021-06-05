@@ -76,26 +76,37 @@ class _MyDropdownState extends State<MyDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-      isExpanded: true,
-      hint: Text('Select User'),
-      value: _selectedUser,
-      onChanged: (String? val) {
-        print(val);
-        context.read(todoListFilter).state = val ?? 'all';
-        setState(() {
-          _selectedUser = val!;
-        });
-      },
-      items: _items.map((String el) {
-        return DropdownMenuItem<String>(
-          value: el,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-              child: Text(el),
-            ),
-        );
-      }).toList(),
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0),
+          color: Colors.white,
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            dropdownColor: Colors.white,
+            isExpanded: true,
+            hint: Text('Select User'),
+            value: _selectedUser,
+            onChanged: (String? val) {
+              context.read(todoListFilter).state = val ?? 'all';
+              setState(() {
+                _selectedUser = val!;
+              });
+            },
+            items: _items.map((String el) {
+              return DropdownMenuItem<String>(
+                value: el,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
+                  child: Text(el, style: TextStyle(fontWeight: el == _selectedUser ? FontWeight.w600 : FontWeight.normal),),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ),
     );
   }
 }
