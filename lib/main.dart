@@ -87,8 +87,11 @@ class _MyDropdownState extends State<MyDropdown> {
           child: DropdownButton(
             dropdownColor: Colors.white,
             isExpanded: true,
-            hint: Text('Select User'),
-            value: _selectedUser,
+            hint: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text('Filter Todos by user'),
+            ),
+            // value: _selectedUser, // DON'T set value if using hint
             onChanged: (String? val) {
               context.read(todoListFilter).state = val ?? 'all';
               setState(() {
