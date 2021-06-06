@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_filter/todo.dart';
-import 'package:riverpod_filter/todo_list.dart';
 import 'package:riverpod_filter/todo_service.dart';
 
 import 'filter_dropdown.dart';
+import 'home_page.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
 }
 
+// PROVIDERS start ********************************************
 final todosProvider = FutureProvider<List<Todo>>((ref) {
   return getTodos();
 });
@@ -28,6 +29,7 @@ final filteredTodos = FutureProvider<List<Todo>>((ref) async {
     return allTodos.where((el) => el.userId == _id).toList();
   }
 });
+// PROVIDERS end ********************************************
 
 class MyApp extends StatelessWidget {
   @override
@@ -38,24 +40,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blue.shade100,
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            FilterDropdown(),
-            Expanded(child: Center(child: TodoList())),
-          ],
-        )
-      ),
     );
   }
 }
