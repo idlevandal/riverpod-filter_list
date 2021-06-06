@@ -26,7 +26,7 @@ class TodoList extends ConsumerWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
-                          colors: [Color(0xFFf6f6f6), Color(0xFFDDDDDD)],
+                          colors: [Color(0xFFFEFEFE), Color(0xFFF2F2F2)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight)),
                   child: ListTile(
