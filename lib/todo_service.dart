@@ -6,7 +6,12 @@ import 'package:riverpod_filter/todo.dart';
 Future<List<Todo>> getTodos() async {
   Response res = await get(Uri.parse('https://jsonplaceholder.typicode.com/todos'));
 
-  List<dynamic> response = jsonDecode(res.body);
+  if (res.statusCode == 200) {
+    List<dynamic> response = jsonDecode(res.body);
 
-  return response.map((todo) => Todo.fromJson(todo)).toList();
+    return response.map((todo) => Todo.fromJson(todo)).toList();
+  } else {
+    print('💥 ERROR retrieving todos...');
+    throw Exception('Error retrieving todos...');
+  }
 }
